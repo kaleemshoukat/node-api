@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const subjectController= require('../controllers/subjectController')
 
-router.get('/', subjectController.subjects)
+router.post('/', subjectController.list)
+router.get('/:id', subjectController.getById)
 
 
 module.exports = router

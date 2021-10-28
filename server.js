@@ -6,13 +6,15 @@ const dotenv= require('dotenv').config()
 const app = express()
 
 //set listener
-const port = process.env.PORT;
+const port = process.env.ENV==='DEV' ? process.env.API_PORT_DEV : process.env.API_PORT_PROD
 app.listen(port, () => { console.log(`App running on port ${port}`) });
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.ENV === 'DEV') {
     app.use(morgan('dev'));
 }
 
+/*Initialize DB*/
+require('./config/db')
 /*Security Headers*/
 app.use(helmet())
 /*JSON Input Handling*/
